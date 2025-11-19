@@ -28,3 +28,15 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)(s + i));
 	return (NULL);
 }
+
+/* #include <stdio.h>
+#include <string.h>
+
+char    *ft_strchr(const char *s, int c);
+
+int main(void)
+{
+    const char *str = "why are we here, just to suffer";
+    printf("el original: %s\n", strchr(str, 'j'));
+    printf("el mio: %s\n\n", ft_strchr(str, 'j'));
+} */

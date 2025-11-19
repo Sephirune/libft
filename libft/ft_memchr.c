@@ -35,7 +35,7 @@ int main(void)
 {
 	const char str[] = "far from heaven";
 	char s1 = 'm';
-	char s2 = 'z';
+	char s2 = 'ñ';
 	char s3 = '\0';
 	size_t n = strlen(str) + 1;
 	printf("busco s1 original '%c': %s\n", s1, (char *)memchr(str, s1, n));

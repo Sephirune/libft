@@ -60,7 +60,7 @@ static int	get_word(char **strings, char const *s, int j, int i)
 		maximum_free(strings);
 		return (-1);
 	}
-	strings[0] = word;
+	*strings = word;
 	return (0);
 }
 

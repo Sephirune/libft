@@ -27,3 +27,20 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
+
+/* #include <stdio.h>
+#include <string.h>
+int main(void)
+{
+	char str1[] = "Hola que tal";
+    char str2[] = "Hola que tal";
+    printf("antes:\n");
+    printf("original: %s\n", str1);
+    printf("mio: %s\n\n", str2);
+    memset(str1, '@', 5);
+    ft_memset(str2, '@', 5);
+    printf("despues del memset:\n");
+    printf("original: %s\n", str1);
+    printf("mio: %s\n", str2);
+    return 0;
+} */

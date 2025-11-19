@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarogarc <aarogarc@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 11:48:59 by aarogarc          #+#    #+#             */
-/*   Updated: 2025/11/10 11:53:26 by aarogarc         ###   ########.fr       */
+/*   Created: 2025/11/11 13:46:00 by aarogarc          #+#    #+#             */
+/*   Updated: 2025/11/11 16:20:16 by aarogarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+int	ft_lstsize(t_list *lst)
 {
-	char	*dest;
-	int		i;
-	int		j;
+	int	i;
 
 	i = 0;
-	j = ft_strlen(s);
-	dest = malloc((j + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	while (s[i])
+	if (!lst)
+		return (0);
+	while (lst)
 	{
-		dest[i] = s[i];
+		lst = lst->next;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (i);
 }
-
-/* #include <string.h>
-#include <stdio.h>
-int	main(void)
-{
-	char src[] = "holaaaaa";
-	char srcmio[] = "holaaaa";
-	printf("el strdup original hace: %s\n", strdup(src));
-	printf("el mio hace: %s\n", strdup(srcmio));
-	return(0);
-} */

@@ -27,3 +27,16 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t n)
 	}
 	return (ft_strlen(src));
 }
+
+/* #include <stdio.h>
+int	main(void)
+{
+	char	dest[] = "1234555";
+	char	src[] = "4567888";
+
+	printf("el original es: %s\n", dest);
+	ft_strlcpy(dest, src, 8);
+	printf("ahora la copia es: %s\n", dest);
+	printf("%zu\n", ft_strlcpy(dest, src, 5));
+	return (0);
+} */

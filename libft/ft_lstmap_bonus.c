@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarogarc <aarogarc@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 10:34:04 by aarogarc          #+#    #+#             */
-/*   Updated: 2025/11/10 10:38:31 by aarogarc         ###   ########.fr       */
+/*   Created: 2025/11/12 11:55:10 by aarogarc          #+#    #+#             */
+/*   Updated: 2025/11/12 17:05:01 by aarogarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	number;
-	int	sign;
-	int	i;
+	t_list	*map;
+	t_list	*helpy;
+	void	*str;
 
-	i = 0;
-	number = 0;
-	sign = 1;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	map = NULL;
+	str = NULL;
+	while (lst)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		str = f(lst->content);
+		if (!str)
+		{
+			ft_lstclear(&map, del);
+			return (NULL);
+		}
+		helpy = ft_lstnew(str);
+		if (!helpy)
+		{
+			ft_lstclear(&map, del);
+			free (str);
+			return (NULL);
+		}
+		ft_lstadd_back(&map, helpy);
+		lst = lst->next;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		number = (number * 10) + (str[i] - '0');
-		i++;
-	}
-	return (number * sign);
+	return (map);
 }
