@@ -6,7 +6,7 @@
 /*   By: aarogarc <aarogarc@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 20:27:58 by aarogarc          #+#    #+#             */
-/*   Updated: 2025/11/13 16:24:17 by aarogarc         ###   ########.fr       */
+/*   Updated: 2025/11/26 03:54:04 by aarogarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -37,17 +37,18 @@ static size_t	count_words(const char *str, char c)
 	return (counter);
 }
 
-static void	maximum_free(char **strings)
+static void	*maximum_free(char **strings, int k)
 {
 	int	i;
 
 	i = 0;
-	while (strings[i])
+	while (k > 0)
 	{
-		free(strings[i]);
-		i++;
+		free(strings[k - 1]);
+		k--;
 	}
 	free(strings);
+	return (NULL);
 }
 
 static int	get_word(char **strings, char const *s, int j, int i)
@@ -56,12 +57,18 @@ static int	get_word(char **strings, char const *s, int j, int i)
 
 	word = ft_substr(s, j, i - j);
 	if (!word)
-	{
-		maximum_free(strings);
 		return (-1);
-	}
 	*strings = word;
 	return (0);
+}
+
+static void	parse_words(int *i, int *j, char c, const char *s)
+{
+	while (s[*i] == c)
+		(*i)++;
+	*j = *i;
+	while (s[*i] && s[*i] != c)
+		(*i)++;
 }
 
 char	**ft_split(char const *s, char c)
@@ -73,7 +80,6 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	k = 0;
-	j = 0;
 	if (!s)
 		return (NULL);
 	strings = malloc((count_words(s, c) + 1) * sizeof(char *));
@@ -81,13 +87,13 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	while (s[i])
 	{
-		while (s[i] == c)
-			i++;
-		j = i;
-		while (s[i] && s[i] != c)
-			i++;
-		if (j != i && get_word(&strings[k++], s, j, i) == -1)
-			return (NULL);
+		parse_words(&i, &j, c, s);
+		if (j != i)
+		{
+			if (get_word(&strings[k], s, j, i) == -1)
+				return (maximum_free(strings, k));
+			k++;
+		}
 	}
 	strings[k] = NULL;
 	return (strings);

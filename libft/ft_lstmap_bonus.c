@@ -39,3 +39,36 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (map);
 }
+
+/*#include <stdio.h>
+void *to_upper(void *c)
+{
+	char *s = (char *)c;
+	char *new = ft_strdup(s);
+	int i = 0;
+	while (new[i])
+	{
+		new[i] = ft_toupper(new[i]);
+		i++;
+	}
+	return (new);
+}
+void	dele(void *c)
+{
+	free(c);
+}
+
+int main(void)
+{
+	t_list *lst = ft_lstnew(ft_strdup("everything in it's right place"));
+	t_list *aux = ft_lstmap(lst, to_upper, dele);
+	
+	printf("OG: %s\n", (char *)lst->content);
+	printf("mio: %s\n", (char *)aux->content);
+	
+	dele(lst->content);
+	free(lst);
+	dele(aux->content);
+	free(aux);
+	return (0);
+}*/
